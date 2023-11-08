@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float movement_speed;
+    private CharacterController myController;
+    public float Gravity = 9.8f;
+    private float velocity = 0f;
+    private void Start()
     {
-        System.Console.Write("example commit");
+        myController= GetComponent<CharacterController>();
+    }
+    private void Update()
+    {
+        MoveMe();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void MoveMe()
     {
-        
+        float horizontal = Input.GetAxis("Horizontal") * movement_speed;
+        float vertical = Input.GetAxis("Vertical") * movement_speed;
+        myController.Move((Vector3.right * horizontal + Vector3.forward * vertical) * Time.deltaTime);
+
+        // Gravity
+        if (myController.isGrounded)
+        {
+            velocity = 0;
+        }
+        else
+        {
+            velocity -= Gravity * Time.deltaTime;
+            myController.Move(new Vector3(0, velocity, 0));
+        }
     }
 }
