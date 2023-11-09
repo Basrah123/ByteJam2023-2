@@ -2,33 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMain : MonoBehaviour
+public class MainCamera : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        m_MainCamera = Camera.main;
-        m_MainCamera.enabled = true;
-        m_CameraTwo.enabled = false;
+        mainCamera = Camera.main;
+        mainCamera.enabled = true;
+        CameraTwo.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         // L button to switch cameras
-        if (Input.GetKeyDown(KevCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            if (m_MainCamera.enabled)
+            if (mainCamera.enabled)
            {
-             m_CameraTwo.enabled = true;
-
-             m_MainCamera.enabled = false;
+                 CameraTwo.enabled = true;
+                 mainCamera.enabled = false;
            }
-           else if (!m_MainCamera.enabled)
+           else if (!mainCamera.enabled)
            {
-            m_CameraTwo.enabled = false;
-
-            m_MainCamera.enabled = true;
+                CameraTwo.enabled = false;
+                mainCamera.enabled = true;
            }
         }
     }
