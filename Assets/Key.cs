@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +20,8 @@ public class Key : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) 
     {
-        print(collision.gameObject.name);     
+        Destroy(collision.gameObject); 
+        Destroy(gameObject);         
     }
 
     /* allow for the bullets to not destroy the ground/floor/walls/levels or any other items 

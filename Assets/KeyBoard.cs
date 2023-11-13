@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -26,7 +25,7 @@ public class KeyBoard : MonoBehaviour
 
        void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (currentAmmo > 0)
             {
@@ -55,4 +54,3 @@ public class KeyBoard : MonoBehaviour
         currentAmmo = maxClipSize; 
     }
 }
-
