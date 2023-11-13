@@ -52,8 +52,7 @@ public class Health : MonoBehaviour
 
     public void DamageHealth(int damageAmount)
     {
-        if (currentHealth > 0)
-        {
+        print("hi");
             currentHealth -= damageAmount;
             currentHealth = Mathf.Max(currentHealth, 0);
             print(currentHealth);
@@ -61,7 +60,6 @@ public class Health : MonoBehaviour
             {
                 Death();
             }
-        }
     }
 
     private void Death()
@@ -82,6 +80,10 @@ public class Health : MonoBehaviour
         else
         {
             Enemy enemycomponent = GetComponent<Enemy>();
+            if (enemycomponent != null)
+            {
+                Destroy(gameObject);
+            }
         }
 
 

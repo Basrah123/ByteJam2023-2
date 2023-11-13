@@ -1,6 +1,6 @@
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
+ using System.Collections;
+ using System.Collections.Generic;
+ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float movement_speed;
@@ -39,14 +39,14 @@ public class Movement : MonoBehaviour
         myController.Move(moveDirection * Time.deltaTime);
 
          // Gravity
-//         if (myController.isGrounded)
-//         {
-//             velocity = 0;
-//         }
-//         else
-//         {
-//             velocity -= Gravity * Time.deltaTime;
-//             myController.Move(new Vector3(0, velocity, 0));
-//         }
-//     }
-// }
+         if (myController.isGrounded)
+        {
+             velocity = 0;
+         }
+         else
+         {
+             velocity -= Gravity * Time.deltaTime;
+             myController.Move(new Vector3(0, velocity, 0));
+         }
+     }
+ }

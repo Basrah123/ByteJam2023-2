@@ -7,8 +7,14 @@ public class Enemy : MonoBehaviour
 {
     NavMeshAgent myAgent;
     Transform destination;
-    public float maxDistance = 10f;
     Transform player;
+    [SerializeField] public float maxDistance = 10f; 
+    [SerializeField] float sizeModifier = 1f; // Unimplemented
+    [SerializeField] float movementSpeed = 3f; // Unimplemented
+    [SerializeField] int health; // Unimplemented
+    [SerializeField] float damageModifier; // Unimplemented
+    [SerializeField] bool isRanged; // Unimplemented
+    [SerializeField] float shootingSpeed; // Unimplemented
 
     private void Start()
     {

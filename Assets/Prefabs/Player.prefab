@@ -36,7 +36,7 @@ Transform:
   - {fileID: 8125830308341144616}
   - {fileID: 8125830307682530289}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &8125830307548710732
 CapsuleCollider:
@@ -446,12 +446,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8125830308413239184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d70deadac58cf8e4a833fb71fd25452d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upRecoil: {x: 2, y: 1, z: 1}
+  upRecoil: {x: 2, y: 1, z: 5}
 --- !u!1 &8125830308639137100
 GameObject:
   m_ObjectHideFlags: 0

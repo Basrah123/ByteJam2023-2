@@ -12,6 +12,7 @@ public class Key : MonoBehaviour
  
   // const variables 
    public float life = 3;
+    [SerializeField] int damage = 25;
     // Find functions of these constructors/method 
 
     void Awake()
@@ -21,7 +22,16 @@ public class Key : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) 
     {
-        print(collision.gameObject.name);     
+        if (collision != null)
+        {
+
+            Health targetHealth = collision.gameObject.GetComponent<Health>();
+            if (targetHealth != null)
+            {
+                targetHealth.DamageHealth(damage);
+            }
+            Destroy(this.gameObject);
+        }   
     }
 
     /* allow for the bullets to not destroy the ground/floor/walls/levels or any other items 

@@ -15,6 +15,8 @@ public class MouseControl : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         offset = transform.position - player.transform.position;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // Freeze Rigidbody rotation to prevent unwanted physics interactions
