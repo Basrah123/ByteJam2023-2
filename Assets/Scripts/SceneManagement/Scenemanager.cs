@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class Scenemanager : MonoBehaviour
 {
     
-    [SerializeField] int level1index;
-    [SerializeField] int deathScreenindex;
+    [SerializeField] private int level1index;
+    [SerializeField] private int deathScreenindex;
     public void startGame()
     {
         SceneManager.LoadScene(level1index);
