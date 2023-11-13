@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     private CharacterController myController;
     public float Gravity = 9.8f;
     private float velocity = 0f;
+
     private void Start()
     {
         myController= GetComponent<CharacterController>();
