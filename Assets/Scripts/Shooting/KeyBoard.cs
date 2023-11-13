@@ -25,7 +25,7 @@ public class KeyBoard : MonoBehaviour
 
        void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (currentAmmo > 0)
             {

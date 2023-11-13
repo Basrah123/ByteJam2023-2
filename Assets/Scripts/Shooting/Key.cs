@@ -20,8 +20,7 @@ public class Key : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) 
     {
-        Destroy(collision.gameObject); 
-        Destroy(gameObject);         
+        print(collision.gameObject.name);     
     }
 
     /* allow for the bullets to not destroy the ground/floor/walls/levels or any other items 
