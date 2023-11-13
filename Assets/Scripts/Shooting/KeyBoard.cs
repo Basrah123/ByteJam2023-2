@@ -8,10 +8,16 @@ public class KeyBoard : MonoBehaviour
     // public variables 
     public Transform bulletSpawnPoint; 
     public GameObject bulletPrefab; 
-    public float bulletSpeed = 50; 
+    public float bulletSpeed = 50;
+    [SerializeField] private float fireRate;
+    private float timeSinceLastShot = 0f;
     // variables for relaoding 
-    public int currentAmmo, maxClipSize = 24; 
-    
+    public int currentAmmo, maxClipSize = 24;
+
+    //Audio logic
+    [SerializeField] private AudioClip reloadClip;
+    [SerializeField] private AudioClip fire;
+    private AudioSource myAudio;
     // logic for reloading 
             // check for ammo 
             // if current ammmo not 0 then shoot 
@@ -21,12 +27,15 @@ public class KeyBoard : MonoBehaviour
     void Start() 
     {
         // Initialize the ammo clip in the keyboard 
-        currentAmmo = maxClipSize; 
+        currentAmmo = maxClipSize;
+        myAudio = GetComponent<AudioSource>();
     }
 
        void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        timeSinceLastShot += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && timeSinceLastShot > fireRate)
         {
             if (currentAmmo > 0)
             {
@@ -35,6 +44,14 @@ public class KeyBoard : MonoBehaviour
                 bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
                 // Subtract one from the current ammo amount.
                 currentAmmo--;
+                FindObjectOfType<UIUpdater>().UpdateCurrentAmmo(currentAmmo);
+
+                //Audio
+                myAudio.clip = fire;
+                myAudio.Play();
+
+                //Fire Rate
+                timeSinceLastShot = 0f;
             }
             else
             {
@@ -52,7 +69,11 @@ public class KeyBoard : MonoBehaviour
     void Reload()
     {
         // Refill the current ammo amount to the max clip size 
-        currentAmmo = maxClipSize; 
+        currentAmmo = maxClipSize;
+        FindObjectOfType<UIUpdater>().UpdateCurrentAmmo(currentAmmo);
+
+        myAudio.clip = reloadClip;
+        myAudio.Play();
     }
 }
 

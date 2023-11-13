@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Health : MonoBehaviour
 {
 
@@ -13,7 +12,8 @@ public class Health : MonoBehaviour
     public int damage = 10; 
     public int healing = 10; 
     public int testHealAmount = 20; 
-    public int testDamageAmount = 30; 
+    public int testDamageAmount = 30;
+    public int armor = 0;
 
     private void Start()
     {
@@ -26,7 +26,10 @@ public class Health : MonoBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
+    public void UpdateArmor(int amount)
+    {
 
+    }
     private void Update()
     {
         if (debugMode)
@@ -42,6 +45,11 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void setHealth(int amount)
+    {
+        currentHealth = amount;
+        maxHealth = amount;
+    }
     public void ApplyHealing(int healAmount)
     {
         if (currentHealth < maxHealth)
@@ -52,14 +60,23 @@ public class Health : MonoBehaviour
 
     public void DamageHealth(int damageAmount)
     {
-        print("hi");
-            currentHealth -= damageAmount;
-            currentHealth = Mathf.Max(currentHealth, 0);
-            print(currentHealth);
-            if (currentHealth <= 0)
-            {
-                Death();
-            }
+
+        currentHealth -= damageAmount;
+        currentHealth = Mathf.Max(currentHealth, 0);
+        if (isPlayer)
+        {
+            FindObjectOfType<UIUpdater>().UpdateHP(currentHealth);
+            DamageEffect();
+        }
+
+        if (currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+    private void DamageEffect()
+    {
+        GetComponent<DamageEffect>().Play();
     }
 
     private void Death()
@@ -82,8 +99,10 @@ public class Health : MonoBehaviour
             Enemy enemycomponent = GetComponent<Enemy>();
             if (enemycomponent != null)
             {
+                enemycomponent.isAlive = false;
                 Destroy(gameObject);
             }
+            FindObjectOfType<UIUpdater>().UpdateEnemies();
         }
 
 
