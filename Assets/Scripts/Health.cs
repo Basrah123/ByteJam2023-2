@@ -6,6 +6,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] bool debugMode = false;
+    [SerializeField] bool isPlayer = false;
     public int maxHealth = 100; 
     public int currentHealth;
     public int damage = 10; 
@@ -63,17 +64,29 @@ public class Health : MonoBehaviour
     }
 
     private void Death()
-    {
-        Scenemanager mySceneManager = FindObjectOfType<Scenemanager>();
-        if (mySceneManager != null)
+    {   
+        if(isPlayer)
         {
-            //mySceneManager.loadDeathScene();
-            print("dead as hell");
+            Scenemanager mySceneManager = FindObjectOfType<Scenemanager>();
+            if (mySceneManager != null)
+            {
+                //mySceneManager.loadDeathScene();
+                print("dead as hell");
+            }
+            else
+            {
+                print("scenemanager not found");
+            }
         }
         else
         {
-            print("scenemanager not found");
+            Enemy enemycomponent = GetComponent<Enemy>();
         }
 
+
+    }
+    public bool getIsPlayer()
+    {
+        return isPlayer;
     }
 }
