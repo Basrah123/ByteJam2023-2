@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+
     [SerializeField] bool debugMode = false;
     [SerializeField] bool isPlayer = false;
     public int maxHealth = 100; 
@@ -26,7 +27,7 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
 
-    void Update()
+    private void Update()
     {
         if (debugMode)
         {
