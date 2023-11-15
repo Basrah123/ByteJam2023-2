@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] bool debugMode = false;
     [SerializeField] bool isPlayer = false;
+    [SerializeField] ParticleSystem bloodEffect;
     public int maxHealth = 100; 
     public int currentHealth;
     public int damage = 10; 
@@ -26,9 +27,41 @@ public class Health : MonoBehaviour
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
+    public void Damage(int amount)
+    {
+        if(armor > 0)
+        {
+            UpdateArmor(-amount);
+        }
+        else
+        {
+            DamageHealth(amount);
+        }
+    }
     public void UpdateArmor(int amount)
     {
+        
+        int newArmor = armor + amount;
 
+        if(amount > 0)
+        {
+            armor += amount;
+        }
+        if(amount < 0)
+        {
+            armor = Mathf.Max(newArmor, 0);
+
+            if(armor == 0)
+            {
+                DamageHealth(newArmor);
+            }
+            else
+            {
+                GetComponent<DamageEffect>().ArmorDamage();
+            }
+            
+        }
+        FindObjectOfType<UIUpdater>().UpdateArmor(armor);
     }
     private void Update()
     {
@@ -66,7 +99,11 @@ public class Health : MonoBehaviour
         if (isPlayer)
         {
             FindObjectOfType<UIUpdater>().UpdateHP(currentHealth);
-            DamageEffect();
+            HealthDamageEffect();
+        }
+        else
+        {
+            bloodEffect.Play();
         }
 
         if (currentHealth <= 0)
@@ -74,9 +111,9 @@ public class Health : MonoBehaviour
             Death();
         }
     }
-    private void DamageEffect()
+    private void HealthDamageEffect()
     {
-        GetComponent<DamageEffect>().Play();
+        GetComponent<DamageEffect>().HpDamage();
     }
 
     private void Death()
@@ -86,7 +123,7 @@ public class Health : MonoBehaviour
             Scenemanager mySceneManager = FindObjectOfType<Scenemanager>();
             if (mySceneManager != null)
             {
-                //mySceneManager.loadDeathScene();
+                mySceneManager.loadDeathScene();
                 print("dead as hell");
             }
             else

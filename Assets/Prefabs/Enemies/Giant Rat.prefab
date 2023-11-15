@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5186204261799383188}
   - component: {fileID: 5186204261799383191}
   - component: {fileID: 5186204261799383190}
+  - component: {fileID: 3225967932024375504}
   m_Layer: 0
   m_Name: Giant Rat
   m_TagString: Untagged
@@ -166,3 +167,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.317991, y: 5.3712764, z: 0.20000608}
   m_Center: {x: -0.008968116, y: -0.002847433, z: -2.1094097e-13}
+--- !u!114 &3225967932024375504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186204261799383184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0676ae8eb60a8e44919666ff1f298b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

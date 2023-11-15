@@ -50,19 +50,10 @@ public class Enemy : MonoBehaviour
         timeSinceLastAttack += Time.deltaTime;
         Movement();
         DamageLogic();
-        RotateMe();
+        
     }
 
-    private void RotateMe()
-    {
-        Vector3 directionToPlayer = player.position - transform.position;
-
-        // Ignore the y-component of the direction, to keep the rotation only around the y-axis
-        directionToPlayer.y = 0f;
-
-        // Set the rotation to face the player only along the Y-axis
-        transform.rotation = Quaternion.LookRotation(directionToPlayer.normalized, Vector3.up);
-    }
+   
     private void DamageLogic()
     {
         if (IsPlayerInLOS())
@@ -77,7 +68,7 @@ public class Enemy : MonoBehaviour
     private void DoDamage()
     {
 
-        player.GetComponent<Health>().DamageHealth(Mathf.RoundToInt(10 * damageModifier));
+        player.GetComponent<Health>().Damage(Mathf.RoundToInt(10 * damageModifier));
     }
 
     private void Movement()

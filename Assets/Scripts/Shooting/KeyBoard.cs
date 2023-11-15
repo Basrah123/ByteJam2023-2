@@ -13,10 +13,12 @@ public class KeyBoard : MonoBehaviour
     private float timeSinceLastShot = 0f;
     // variables for relaoding 
     public int currentAmmo, maxClipSize = 24;
-
+    public float reloadTime = 3f;
+    private bool canShoot = true;
     //Audio logic
     [SerializeField] private AudioClip reloadClip;
     [SerializeField] private AudioClip fire;
+    [SerializeField] private AudioClip doneReloadingClip;
     private AudioSource myAudio;
     // logic for reloading 
             // check for ammo 
@@ -35,7 +37,7 @@ public class KeyBoard : MonoBehaviour
     {
         timeSinceLastShot += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && timeSinceLastShot > fireRate)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && timeSinceLastShot > fireRate && canShoot)
         {
             if (currentAmmo > 0)
             {
@@ -62,18 +64,24 @@ public class KeyBoard : MonoBehaviour
         }
         // logic to allow for reloading the keyboard
         if (Input.GetKeyDown (KeyCode.R)){
-            Reload(); 
+            StartCoroutine(Reload());
         }
     }
     // method for reloading, set the current ammo amt to the max clip 
-    void Reload()
+    private IEnumerator Reload()
     {
+        //
+        canShoot = false;
+        myAudio.clip = reloadClip;
+        myAudio.Play();
+
+        yield return new WaitForSeconds(reloadTime);
         // Refill the current ammo amount to the max clip size 
         currentAmmo = maxClipSize;
         FindObjectOfType<UIUpdater>().UpdateCurrentAmmo(currentAmmo);
 
-        myAudio.clip = reloadClip;
-        myAudio.Play();
+        myAudio.clip = doneReloadingClip; myAudio.Play();
+        canShoot= true;
     }
 }
 

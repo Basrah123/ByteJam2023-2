@@ -8,7 +8,7 @@ public class Key : MonoBehaviour
 
 /** These are the functions for the bullets from the keyboard 
   which in this are the 'keys' from the keyboard 
-*/
+*/  
  
   // const variables 
    public float life = 3;
@@ -28,7 +28,9 @@ public class Key : MonoBehaviour
             Health targetHealth = collision.gameObject.GetComponent<Health>();
             if (targetHealth != null)
             {
+
                 targetHealth.DamageHealth(damage);
+                
             }
             Destroy(this.gameObject);
         }   
